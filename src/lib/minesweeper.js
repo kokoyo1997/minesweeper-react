@@ -1,5 +1,6 @@
 import { CODES } from '../constants';
 
+// 初始化棋盘
 export const initBoard = (width, height, mineCount) => {
 	const candidates = Array(width * height).fill().map((v, i) => i);
 	const shuffle = [];
@@ -24,20 +25,22 @@ export const initBoard = (width, height, mineCount) => {
 	return boardData;
 };
 
+// 根据棋盘当前状态获取其下一个状态（右键时才使用
+// 为了不丢失雷的信息，所以分了好几种状态
 export const getNextCellCode = (code) => {
 	switch (code) {
-		case CODES.NOTHING:
-			return CODES.FLAG;
-		case CODES.MINE:
-			return CODES.MINE_FLAG;
-		case CODES.FLAG:
-			return CODES.QUESTION;
-		case CODES.MINE_FLAG:
-			return CODES.MINE_QUESTION;
-		case CODES.QUESTION:
-			return CODES.NOTHING;
-		case CODES.MINE_QUESTION:
-			return CODES.MINE;
+		case CODES.NOTHING: //没有雷
+			return CODES.FLAG; //右键时设置为平地插旗
+		case CODES.MINE://本来就是雷
+			return CODES.MINE_FLAG; //右键，变为在雷上插旗状态
+		case CODES.FLAG://平地插旗
+			return CODES.QUESTION;//变成平地问号
+		case CODES.MINE_FLAG://雷上插旗
+			return CODES.MINE_QUESTION;//变成雷上问号
+		case CODES.QUESTION://平地问号
+			return CODES.NOTHING;//恢复成初始没有雷的状态
+		case CODES.MINE_QUESTION://雷上问号
+			return CODES.MINE;//恢复为本身的雷
 		default:
 			return code;
 	}
@@ -55,7 +58,7 @@ export const getFlagIncDec = (code) => {
 			return 0;
 	}
 };
-
+//扩展棋盘信息（左键时调用，根据目前棋盘状况和点击的格子，返回新状况以及扩展的格子数量
 export const expandOpenedCell = (boardData, x, y) => {
 	let openedCellCount = 0;
 

@@ -1,5 +1,9 @@
-💣
-⚙️
-🕙
-😄
-😢
+mine: 💣
+setting: ⚙️
+time: 🕙
+smile: 😄
+cry: 😢
+cool: 😎
+flag: 🚩
+question: ❔
+boom: 💥

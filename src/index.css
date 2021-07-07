@@ -1,3 +1,4 @@
+@charset "utf-8";
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +11,7 @@ body {
 .box {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 .box main {
   padding: 26px;
@@ -42,7 +44,25 @@ h1 {
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.5);
   vertical-align: middle;
+  font-size: 18px;
+}
+.board .board-row .square.plain {
+  background: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  color: #0984E3;
+}
+.board .board-row .square.flag {
+  background: #F1C40F;
+}
+.board .board-row .square.question {
+  background: #44D580;
+  font-weight: 600;
+  font-size: 20px;
+  color: #fff;
 }
 .ref {
+  margin-top: 20px;
   text-align: center;
+  color: #000;
 }
