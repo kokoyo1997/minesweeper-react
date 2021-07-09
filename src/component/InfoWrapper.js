@@ -1,6 +1,6 @@
 import { GAMESTATE } from "../constants";
 
-function InfoWrapper({mines,leftMines,gameState,handleRestart,runtime}){
+function InfoWrapper({mines,leftMines,gameState,handleRestart,runtime,handleShowSet}){
   
   const transformStatus=(state)=>{
     switch(state){
@@ -17,7 +17,7 @@ function InfoWrapper({mines,leftMines,gameState,handleRestart,runtime}){
   return (
       <div className="info">
         <div className="count"><span>💣</span>{leftMines}/{mines}</div>
-        <div className="status"><button onClick={handleRestart}>{status}</button><button>⚙️</button></div>
+        <div className="status"><button onClick={handleRestart}>{status}</button><button onClick={handleShowSet}>⚙️</button></div>
         <div className="time"><span>🕙</span>{runtimeStr}</div>
       </div>
   );
