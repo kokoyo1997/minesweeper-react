@@ -40,18 +40,21 @@ function Game(){
             //如果这确实是有雷的，mine数量恢复一个
             if(cur_boardData[i][j]===CODES.MINE_QUESTION) setMineCount(prev=>prev+1);
         }
-           
-        //恢复空白，open数量减少
-        // else{
-        //     setOpenedCount(prev=>prev-1);
-        // }
         setBoardData(cur_boardData);
     };
     // 左键
     const handleLeftClick=(i,j)=>{
         if(gameState===GAMESTATE.WIN||gameState===GAMESTATE.LOSE) return;
-        if(gameState===GAMESTATE.READY) setGameState(GAMESTATE.RUN);
         let cur_boardData=boardData.slice();
+        
+        if(gameState===GAMESTATE.READY) {
+            //如果第一次点击就点到雷，那么重新初始化生成
+            while(cur_boardData[i][j]==CODES.MINE){
+                cur_boardData=initBoard(gameAttr.width,gameAttr.height,gameAttr.mines);
+            }
+            setGameState(GAMESTATE.RUN);
+        }
+        
         if(cur_boardData[i][j]===CODES.MINE){
             setGameState(GAMESTATE.LOSE);
             return;
